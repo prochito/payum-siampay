@@ -61,6 +61,6 @@ class Api
      */
     protected function getApiEndpoint()
     {
-        return $this->options['sandbox'] ? 'http://sandbox.example.com' : 'http://example.com';
+        return $this->options['sandbox'] ? 'https://test.siampay.com/b2cDemo/eng/payment/payForm.jsp' : 'https://www.siampay.com/b2c2/eng/payment/payForm.jsp';
     }
 }
