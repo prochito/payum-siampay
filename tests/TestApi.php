@@ -1,4 +1,8 @@
 <?php
+namespace Prochito\Siampay\Tests;
+
+use Prochito\Siampay\Api;
+
 
 /**
  * Created by PhpStorm.
@@ -6,9 +10,9 @@
  * Date: 8/11/16
  * Time: 11:12 PM
  */
-use \Api;
 
-class TestCaptureAction extends \PHPUnit_Framework_TestCase{
+
+class TestApi extends \PHPUnit_Framework_TestCase{
 
     public function testExecute() {
         //$model = Payum\Core\Model\Payment::

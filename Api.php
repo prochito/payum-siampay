@@ -1,5 +1,5 @@
 <?php
-namespace Payum\Skeleton;
+namespace Prochito\Siampay;
 
 use Http\Message\MessageFactory;
 use Payum\Core\Exception\Http\HttpException;
@@ -8,7 +8,7 @@ use Payum\Core\HttpClientInterface;
 class Api
 {
     /**
-     * @var HttpClientInterface
+     * @var HttpClientInterfacecd
      */
     protected $client;
 

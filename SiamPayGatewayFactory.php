@@ -1,13 +1,13 @@
 <?php
-namespace Payum\Skeleton;
+namespace Prochito\Siampay;
 
-use Payum\Skeleton\Action\AuthorizeAction;
-use Payum\Skeleton\Action\CancelAction;
-use Payum\Skeleton\Action\ConvertPaymentAction;
-use Payum\Skeleton\Action\CaptureAction;
-use Payum\Skeleton\Action\NotifyAction;
-use Payum\Skeleton\Action\RefundAction;
-use Payum\Skeleton\Action\StatusAction;
+use Prochito\Siampay\Action\AuthorizeAction;
+use Prochito\Siampay\Action\CancelAction;
+use Prochito\Siampay\Action\ConvertPaymentAction;
+use Prochito\Siampay\Action\CaptureAction;
+use Prochito\Siampay\Action\NotifyAction;
+use Prochito\Siampay\Action\RefundAction;
+use Prochito\Siampay\Action\StatusAction;
 use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\GatewayFactory;
 

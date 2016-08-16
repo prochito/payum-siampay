@@ -1,5 +1,5 @@
 <?php
-namespace Payum\Skeleton\Action;
+namespace Prochito\Siampay\Action;
 
 use Payum\Core\Action\GatewayAwareAction;
 use Payum\Core\Bridge\Spl\ArrayObject;
