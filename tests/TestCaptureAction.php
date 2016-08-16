@@ -6,8 +6,9 @@
  * Date: 8/11/16
  * Time: 11:12 PM
  */
-class TestCaptureAction extends Payum\Core\Tests\Action\CapturePaymentActionTest{
+use \Api;
 
+class TestCaptureAction extends \PHPUnit_Framework_TestCase{
 
     public function testExecute() {
         //$model = Payum\Core\Model\Payment::
