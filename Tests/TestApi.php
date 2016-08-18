@@ -1,6 +1,7 @@
 <?php
 namespace Prochito\Siampay\Tests;
 
+use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Prochito\Siampay\Api;
 
 
@@ -32,9 +33,27 @@ class TestApi extends \PHPUnit_Framework_TestCase{
             'lang' => 'E',
             'payMethod' => 'ALL',
             'sandbox' => true,
+            'password' => 'Mypassword'
         ), $this->createHttpClientMock(), $this->createHttpMessageFactory());
         $params['HASH'] = $api->calculateHash($params);
         $this->assertTrue($api->verifyHash($params));
         
     }
+
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|HttpClientInterface
+     */
+    protected function createHttpClientMock()
+    {
+        return $this->getMock('Payum\Core\HttpClientInterface');
+    }
+    /**
+     * @return \Http\Message\MessageFactory
+     */
+    protected function createHttpMessageFactory()
+    {
+        return new GuzzleMessageFactory();
+    }
+
 }

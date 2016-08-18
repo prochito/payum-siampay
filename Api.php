@@ -63,4 +63,56 @@ class Api
     {
         return $this->options['sandbox'] ? 'https://test.siampay.com/b2cDemo/eng/payment/payForm.jsp' : 'https://www.siampay.com/b2c2/eng/payment/payForm.jsp';
     }
+
+    /**
+     * @param  array $params
+     */
+    protected function addGlobalParams(array &$params)
+    {
+//        $params['VERSION'] = self::VERSION;
+        $params['IDENTIFIER'] = $this->options['identifier'];
+        $params['HASH'] = $this->calculateHash($params);
+    }
+
+    /**
+     * @param array $params
+     * @return string
+     */
+    public function calculateHash(array $params){
+        ksort($params);
+        $clearString = $this->options['password'];
+        foreach ($params as $key => $value) {
+            $clearString .= $key.'='.$value.$this->options['password'];
+        }
+        return hash('sha256', $clearString);
+    }
+
+    /**
+     * @param array $params
+     * @return bool
+     */
+    public function verifyHash(array $params){
+        if (empty($params['HASH'])) {
+            return false;
+        }
+        $hash = $params['HASH'];
+        unset($params['HASH']);
+        return $hash === $this->calculateHash($params);
+    }
+
+    /**
+     * @param array $params
+     *
+     * @return array
+     */
+    public function payment(array $params)
+    {
+        $params['OPERATIONTYPE'] = static::OPERATION_PAYMENT;
+        $this->addGlobalParams($params);
+
+        return $this->doRequest([
+            'method' => 'payment',
+            'params' => $params
+        ]);
+    }
 }
