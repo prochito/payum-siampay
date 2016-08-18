@@ -57,6 +57,13 @@ class Api
     }
 
     /**
+     * @return array
+     */
+    public function payment(){
+        return $this->doRequest('Post', $this->options);
+    }
+
+    /**
      * @return string
      */
     protected function getApiEndpoint()
@@ -98,21 +105,5 @@ class Api
         $hash = $params['HASH'];
         unset($params['HASH']);
         return $hash === $this->calculateHash($params);
-    }
-
-    /**
-     * @param array $params
-     *
-     * @return array
-     */
-    public function payment(array $params)
-    {
-        $params['OPERATIONTYPE'] = static::OPERATION_PAYMENT;
-        $this->addGlobalParams($params);
-
-        return $this->doRequest([
-            'method' => 'payment',
-            'params' => $params
-        ]);
     }
 }
