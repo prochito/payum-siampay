@@ -58,7 +58,7 @@ class ApiTest extends \PHPUnit_Framework_TestCase{
             'payMethod' => 'ALL',
             'sandbox' => true,
             'secureHash' => '44f3760c201d3688440f62497736bfa2aadd1bc0',
-            'password' => 'Mypassword'
+//            'password' => 'want2Believe'
         ), $this->createHttpClientMock(), $this->createHttpMessageFactory());
 
         $this->assertTrue($api->payment());
