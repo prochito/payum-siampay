@@ -60,7 +60,7 @@ class Api
      * @return array
      */
     public function payment(){
-        return $this->doRequest('Post', $this->options);
+        return $this->doRequest('POST', $this->options);
     }
 
     /**

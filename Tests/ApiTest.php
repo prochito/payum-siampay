@@ -37,13 +37,13 @@ class ApiTest extends \PHPUnit_Framework_TestCase{
         ), $this->createHttpClientMock(), $this->createHttpMessageFactory());
         $params['HASH'] = $api->calculateHash($params);
         $this->assertTrue($api->verifyHash($params));
-        
+
     }
 
     /**
      * @return array
      */
-    public function paymentTest(){
+    public function testPayment(){
         $api = new Api(array(
             'merchantId' => '76063508',
             'amount' => 10000,
@@ -57,10 +57,11 @@ class ApiTest extends \PHPUnit_Framework_TestCase{
             'lang' => 'E',
             'payMethod' => 'ALL',
             'sandbox' => true,
+            'secureHash' => '44f3760c201d3688440f62497736bfa2aadd1bc0',
             'password' => 'Mypassword'
         ), $this->createHttpClientMock(), $this->createHttpMessageFactory());
 
-        return $this->expectOutputString($api->payment());
+        $this->assertTrue($api->payment());
     }
 
     /**
