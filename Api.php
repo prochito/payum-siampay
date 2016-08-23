@@ -46,7 +46,7 @@ class Api
         $headers = [];
 
         $request = $this->messageFactory->createRequest($method, $this->getApiEndpoint(), $headers, http_build_query($fields));
-
+        var_dump($request);
         $response = $this->client->send($request);
 
         if (false == ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300)) {
