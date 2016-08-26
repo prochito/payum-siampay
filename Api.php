@@ -46,7 +46,7 @@ class Api
         $headers = [];
 
         $request = $this->messageFactory->createRequest($method, $this->getApiEndpoint(), $headers, http_build_query($fields));
-
+        var_dump($request);
         $response = $this->client->send($request);
 
         if (false == ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300)) {
@@ -54,6 +54,13 @@ class Api
         }
 
         return $response;
+    }
+
+    /**
+     * @return array
+     */
+    public function payment(){
+        return $this->doRequest('POST', $this->options);
     }
 
     /**
@@ -98,21 +105,5 @@ class Api
         $hash = $params['HASH'];
         unset($params['HASH']);
         return $hash === $this->calculateHash($params);
-    }
-
-    /**
-     * @param array $params
-     *
-     * @return array
-     */
-    public function payment(array $params)
-    {
-        $params['OPERATIONTYPE'] = static::OPERATION_PAYMENT;
-        $this->addGlobalParams($params);
-
-        return $this->doRequest([
-            'method' => 'payment',
-            'params' => $params
-        ]);
     }
 }
