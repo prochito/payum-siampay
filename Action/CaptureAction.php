@@ -35,7 +35,7 @@ class CaptureAction extends GatewayAwareAction
 
         $model = ArrayObject::ensureArrayObject($request->getModel());
 
-        $this->gateway->execute($request);
+        // $this->gateway->execute($request);
 //        $this->api = new Api($model, $this->createHttpClientMock(), $this->createHttpMessageFactory());
 
         return $this->api->payment();
