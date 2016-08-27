@@ -22,8 +22,9 @@ class ConvertPaymentAction extends GatewayAwareAction
 
         /** @var PaymentInterface $payment */
         $payment = $request->getSource();
-
-        throw new \LogicException('Not implemented');
+        $details = ArrayObject::ensureArrayObject($payment->getDetails());
+        $details['amount'] = $payment->getTotalAmount();
+        $request->setResult((array) $details);
     }
 
     /**
