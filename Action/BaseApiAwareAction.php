@@ -1,10 +1,10 @@
 <?php
-namespace Payum\Skeleton\Action\Api;
+namespace Prochito\Siampay\Action;
 
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\ApiAwareInterface;
 use Payum\Core\Exception\UnsupportedApiException;
-use Payum\Skeleton\Api;
+use Prochito\Siampay\Api;
 
 abstract class BaseApiAwareAction implements ActionInterface, ApiAwareInterface
 {

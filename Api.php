@@ -1,5 +1,5 @@
 <?php
-namespace Payum\Skeleton;
+namespace Prochito\Siampay;
 
 use Http\Message\MessageFactory;
 use Payum\Core\Exception\Http\HttpException;
@@ -8,7 +8,7 @@ use Payum\Core\HttpClientInterface;
 class Api
 {
     /**
-     * @var HttpClientInterface
+     * @var HttpClientInterfacecd
      */
     protected $client;
 
@@ -46,7 +46,7 @@ class Api
         $headers = [];
 
         $request = $this->messageFactory->createRequest($method, $this->getApiEndpoint(), $headers, http_build_query($fields));
-
+        var_dump($request);
         $response = $this->client->send($request);
 
         if (false == ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300)) {
@@ -57,10 +57,53 @@ class Api
     }
 
     /**
+     * @return array
+     */
+    public function payment(){
+        return $this->doRequest('POST', $this->options);
+    }
+
+    /**
      * @return string
      */
     protected function getApiEndpoint()
     {
-        return $this->options['sandbox'] ? 'http://sandbox.example.com' : 'http://example.com';
+        return $this->options['sandbox'] ? 'https://test.siampay.com/b2cDemo/eng/payment/payForm.jsp' : 'https://www.siampay.com/b2c2/eng/payment/payForm.jsp';
+    }
+
+    /**
+     * @param  array $params
+     */
+    protected function addGlobalParams(array &$params)
+    {
+//        $params['VERSION'] = self::VERSION;
+        $params['IDENTIFIER'] = $this->options['identifier'];
+        $params['HASH'] = $this->calculateHash($params);
+    }
+
+    /**
+     * @param array $params
+     * @return string
+     */
+    public function calculateHash(array $params){
+        ksort($params);
+        $clearString = $this->options['password'];
+        foreach ($params as $key => $value) {
+            $clearString .= $key.'='.$value.$this->options['password'];
+        }
+        return hash('sha256', $clearString);
+    }
+
+    /**
+     * @param array $params
+     * @return bool
+     */
+    public function verifyHash(array $params){
+        if (empty($params['HASH'])) {
+            return false;
+        }
+        $hash = $params['HASH'];
+        unset($params['HASH']);
+        return $hash === $this->calculateHash($params);
     }
 }
